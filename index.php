@@ -1,0 +1,354 @@
+
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- FontAwesome for icons (optional) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <?php
+session_start();
+?>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.php">MyOnlineShop</a>
+  <button class="navbar-toggler" type="button"
+          data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <?php if (!empty($_SESSION['user_id'])): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
+        </li>
+      <?php else: ?>
+        <li class="nav-item">
+          <a class="nav-link" href="login.php">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="register.php">Register</a>
+        </li>
+      <?php endif; ?>
+    </ul>
+  </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section class="jumbotron text-center bg-light py-5">
+        <div class="container">
+            <h1 class="jumbotron-heading">Welcome to MyOnlineShop</h1>
+            <p class="lead text-muted">Find the best deals on Clothing, Books, Software and Courses.</p>
+            <p>
+                <a href="#clothing" class="btn btn-primary my-2">Explore Clothing</a>
+                <a href="#books" class="btn btn-secondary my-2">Explore Books</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Categories</h2>
+            <div class="row">
+                <!-- Clothing Category -->
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200?text=Clothing" class="card-img-top" alt="Clothing">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Clothing</h5>
+                            <p class="card-text">Explore our latest clothing products.</p>
+                            <a href="#clothing" class="btn btn-primary">View Clothing</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Books Category -->
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200?text=Books" class="card-img-top" alt="Books">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Books</h5>
+                            <p class="card-text">Discover top books and literature.</p>
+                            <a href="#books" class="btn btn-primary">View Books</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Software Category -->
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200?text=Software" class="card-img-top" alt="Software">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Software</h5>
+                            <p class="card-text">Browse essential software packages.</p>
+                            <a href="#software" class="btn btn-primary">View Software</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Courses Category -->
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200?text=Courses" class="card-img-top" alt="Courses">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Courses</h5>
+                            <p class="card-text">Check out our educational courses.</p>
+                            <a href="#courses" class="btn btn-primary">View Courses</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clothing Products Section -->
+    <section id="clothing" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Clothing Products</h2>
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Clothing+Item+1" class="card-img-top" alt="Clothing Item 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Stylish T-Shirt</h5>
+                            <p class="card-text">Price: ৳350</p>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Clothing+Item+2" class="card-img-top" alt="Clothing Item 2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Casual Jeans</h5>
+                            <p class="card-text">Price: ৳1200</p>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Clothing+Item+3" class="card-img-top" alt="Clothing Item 3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Formal Shirt</h5>
+                            <p class="card-text">Price: ৳800</p>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Books Products Section -->
+    <section id="books" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Books Collection</h2>
+            <div class="row">
+                <!-- Book 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Book+1" class="card-img-top" alt="Book 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Learn HTML & CSS</h5>
+                            <p class="card-text">Price: ৳450</p>
+                            <a href="#" class="btn btn-secondary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Book 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Book+2" class="card-img-top" alt="Book 2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Mastering Python</h5>
+                            <p class="card-text">Price: ৳650</p>
+                            <a href="#" class="btn btn-secondary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Book 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Book+3" class="card-img-top" alt="Book 3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Data Structures</h5>
+                            <p class="card-text">Price: ৳500</p>
+                            <a href="#" class="btn btn-secondary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software Products Section -->
+    <section id="software" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Software Products</h2>
+            <div class="row">
+                <!-- Software 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Software+1" class="card-img-top" alt="Software 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Antivirus Pro</h5>
+                            <p class="card-text">Price: ৳1500</p>
+                            <a href="#" class="btn btn-success">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Software 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Software+2" class="card-img-top" alt="Software 2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Photo Editor X</h5>
+                            <p class="card-text">Price: ৳1200</p>
+                            <a href="#" class="btn btn-success">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Software 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Software+3" class="card-img-top" alt="Software 3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Office Suite</h5>
+                            <p class="card-text">Price: ৳2000</p>
+                            <a href="#" class="btn btn-success">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Products Section -->
+    <section id="courses" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Courses</h2>
+            <div class="row">
+                <!-- Course 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Course+1" class="card-img-top" alt="Course 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Web Development Bootcamp</h5>
+                            <p class="card-text">Price: ৳2500</p>
+                            <a href="#" class="btn btn-warning">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Course+2" class="card-img-top" alt="Course 2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Machine Learning A-Z</h5>
+                            <p class="card-text">Price: ৳3000</p>
+                            <a href="#" class="btn btn-warning">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://via.placeholder.com/400x300?text=Course+3" class="card-img-top" alt="Course 3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Digital Marketing</h5>
+                            <p class="card-text">Price: ৳1800</p>
+                            <a href="#" class="btn btn-warning">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2025 MyOnlineShop. All rights reserved.</p>
+            <p>
+                <a href="#" class="text-white mx-2">Privacy Policy</a> |
+                <a href="#" class="text-white mx-2">Terms & Conditions</a> |
+                <a href="#" class="text-white mx-2">Contact Us</a>
+            </p>
+            <div class="mt-3">
+                <a href="#" class="text-white mx-2"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fa fa-instagram"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal Placeholder (Future) -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <!-- Login Form Placeholder -->
+                    <p>Login form will be here in future integration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal Placeholder (Future) -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <!-- Register Form Placeholder -->
+                    <p>Registration form will be here in future integration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdUfBeG5yF1mddlyT2vO3cHvP5Od1Afd4DlUStzO+6frR8H5SkqHVzD1nF8HYk" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-LtrjvnR4GEbVx5xgS3x43s9ai4KU7c+Z2R6bQlAQ2LJtENPoZfZdz3MPnkZ91b2Q" crossorigin="anonymous">
+    </script>
+
+    <!-- External JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
