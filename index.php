@@ -17,7 +17,7 @@ session_start();
 </head>
 <body>
   <?php
-session_start();
+
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="index.php">MyOnlineShop</a>

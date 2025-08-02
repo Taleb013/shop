@@ -3,7 +3,7 @@ session_start();
 
 // If already logged in, send them home
 if (!empty($_SESSION['user_id'])) {
-    header('Location: index.html');
+    header('Location: index.php');
     exit;
 }
 
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['full_name'] = $user['full_name'];
     $_SESSION['success']   = "Welcome back, " . htmlspecialchars($user['full_name']) . "!";
 
-    header('Location: index.html');
+    header('Location: index.php');
     exit;
 }
 ?>
@@ -83,14 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="d-flex flex-column min-vh-100">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">ShopSmart</a>
+      <a class="navbar-brand" href="index.php">ShopSmart</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
           <li class="nav-item"><a class="nav-link active" href="login.php">Login</a></li>
           <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
         </ul>

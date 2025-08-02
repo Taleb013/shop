@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cartItemsContainer.innerHTML = `
           <div class="col text-center">
             <h5>Your cart is empty.</h5>
-            <a href="index.html" class="btn btn-outline-primary mt-3">Go Shopping</a>
+            <a href="index.php" class="btn btn-outline-primary mt-3">Go Shopping</a>
           </div>`;
         cartTotalElement.textContent = "$0.00";
         return;
