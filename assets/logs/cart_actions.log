@@ -1,0 +1,4 @@
+[2025-08-08 23:56:03] INSERTED_CART user_id=3 product_id=24 qty=1
+[2025-08-08 23:56:06] UPDATED_CART user_id=3 product_id=24 new_qty=2
+[2025-08-08 23:56:11] UPDATED_CART user_id=3 product_id=24 new_qty=3
+[2025-08-08 23:56:24] INSERTED_CART user_id=3 product_id=28 qty=1
