@@ -1,0 +1,225 @@
+<?php
+session_start();
+require_once 'db.php';
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+try {
+    // Get user details
+    $user_id = $_SESSION['user_id'];
+    $stmt = $conn->prepare("SELECT id, full_name, email, phone, location FROM users WHERE id = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Get cart items with calculated prices
+    $stmt = $conn->prepare("
+        SELECT c.*, p.name, p.price, p.discount,
+               (CASE 
+                    WHEN p.discount > 0 
+                    THEN p.price - (p.price * p.discount / 100)
+                    ELSE p.price 
+                END) as actual_price,
+               (CASE 
+                    WHEN p.discount > 0 
+                    THEN (p.price - (p.price * p.discount / 100)) * c.quantity
+                    ELSE p.price * c.quantity 
+                END) as subtotal
+        FROM cart c
+        JOIN product p ON c.product_code = p.code
+        WHERE c.user_id = ?
+    ");
+
+    $stmt->execute([$user_id]);
+    $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Calculate total
+    $total = array_sum(array_column($cart_items, 'subtotal'));
+
+    // Redirect if cart is empty
+    if (empty($cart_items)) {
+        header('Location: cart.php');
+        exit();
+    }
+} catch (PDOException $e) {
+    error_log("Checkout error: " . $e->getMessage());
+    header('Location: cart.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .order-summary { background: #f8f9fa; padding: 20px; border-radius: 8px; }
+        .cart-item { border-bottom: 1px solid #dee2e6; padding: 10px 0; }
+        .cart-item:last-child { border-bottom: none; }
+        #orderSuccessModal .modal-body { text-align: center; padding: 2rem; }
+        .success-icon { font-size: 4rem; color: #28a745; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Checkout</h3>
+                    <form id="checkoutForm" method="POST" action="process_user_order.php">
+                        <div class="form-group">
+                            <label for="shipping_address">Shipping Address</label>
+                            <textarea name="shipping_address" id="shipping_address" class="form-control" rows="3" required><?= htmlspecialchars($user['location'] ?? '') ?></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="payment_method">Payment Method</label>
+                            <select name="payment_method" id="payment_method" class="form-control" required>
+                                <option value="">Select Payment Method</option>
+                                <option value="bKash">bKash</option>
+                                <option value="Nagad">Nagad</option>
+                                <option value="Cash on Delivery">Cash on Delivery</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                        <a href="cart.php" class="btn btn-secondary">Back to Cart</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="order-summary">
+                <h4>Order Summary</h4>
+                <?php foreach ($cart_items as $item) { ?>
+                <div class="cart-item">
+                    <p class="mb-1">
+                        <strong><?= htmlspecialchars($item['name']) ?></strong>
+                        <?php if ($item['discount'] > 0) { ?>
+                            <span class="badge badge-success"><?= $item['discount'] ?>% OFF</span>
+                        <?php } ?>
+                    </p>
+                    <p class="mb-1">Quantity: <?= $item['quantity'] ?></p>
+                    <p class="mb-1">
+                        Price: 
+                        <?php if ($item['discount'] > 0) { ?>
+                            <del class="text-muted">৳<?= number_format($item['price'], 2) ?></del>
+                            <strong>৳<?= number_format($item['actual_price'], 2) ?></strong>
+                        <?php } else { ?>
+                            ৳<?= number_format($item['price'], 2) ?>
+                        <?php } ?>
+                    </p>
+                    <p class="mb-0">Subtotal: ৳<?= number_format($item['subtotal'], 2) ?></p>
+                </div>
+                <?php } ?>
+                <hr>
+                <h5>Total: ৳<?= number_format($total, 2) ?></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Success Modal -->
+<div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h4>Order Placed Successfully!</h4>
+                <p>Your order has been confirmed.</p>
+                <p>Order ID: <span id="orderIdSpan"></span></p>
+                <p>Total Amount: ৳<span id="totalAmountSpan"></span></p>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='index.php'">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to place this order?</p>
+                <p>Total Amount: ৳<?= number_format($total, 2) ?></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmOrderBtn">Yes, Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Show confirmation modal on form submit
+    $('#checkoutForm').on('submit', function(e) {
+        e.preventDefault();
+        $('#confirmOrderModal').modal('show');
+    });
+
+    // Handle order confirmation
+    $('#confirmOrderBtn').click(function() {
+        const form = $('#checkoutForm');
+        const formData = new FormData(form[0]);
+
+        // Disable button and show loading state
+        $(this).prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+
+        // Submit order via AJAX
+        $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $('#confirmOrderModal').modal('hide');
+                
+                if (response.success) {
+                    // Show success modal
+                    $('#orderIdSpan').text(response.order_id);
+                    $('#totalAmountSpan').text(response.total.toFixed(2));
+                    $('#orderSuccessModal').modal('show');
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            },
+            error: function() {
+                alert('An error occurred. Please try again.');
+            },
+            complete: function() {
+                // Re-enable button
+                $('#confirmOrderBtn').prop('disabled', false).text('Yes, Place Order');
+            }
+        });
+    });
+
+    // Redirect to home after success modal is closed
+    $('#orderSuccessModal').on('hidden.bs.modal', function () {
+        window.location.href = 'index.php';
+    });
+});
+</script>
+
+</body>
+</html>
