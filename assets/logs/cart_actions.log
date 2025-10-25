@@ -1,0 +1,27 @@
+[2025-08-08 23:56:03] INSERTED_CART user_id=3 product_id=24 qty=1
+[2025-08-08 23:56:06] UPDATED_CART user_id=3 product_id=24 new_qty=2
+[2025-08-08 23:56:11] UPDATED_CART user_id=3 product_id=24 new_qty=3
+[2025-08-08 23:56:24] INSERTED_CART user_id=3 product_id=28 qty=1
+[2025-10-22 11:12:45] NO_SESSION -- incoming={"code":"3","buy":"1"}
+[2025-10-22 19:39:30] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:02:48] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:25:20] PRODUCT_NOT_FOUND_BY_CODE -- code=1 user_id=1
+[2025-10-22 20:25:27] PRODUCT_NOT_FOUND_BY_CODE -- code=1 user_id=1
+[2025-10-22 20:25:36] PRODUCT_NOT_FOUND_BY_CODE -- code=1 user_id=1
+[2025-10-22 20:25:42] PRODUCT_NOT_FOUND_BY_CODE -- code=123 user_id=1
+[2025-10-22 20:25:45] PRODUCT_NOT_FOUND_BY_CODE -- code=5 user_id=1
+[2025-10-22 20:25:48] PRODUCT_NOT_FOUND_BY_CODE -- code=7 user_id=1
+[2025-10-22 20:25:50] PRODUCT_NOT_FOUND_BY_CODE -- code=7 user_id=1
+[2025-10-22 20:26:00] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:26:15] PRODUCT_NOT_FOUND_BY_CODE -- code=7 user_id=1
+[2025-10-22 20:26:18] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:26:26] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:26:42] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:41:05] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:41:08] PRODUCT_NOT_FOUND_BY_CODE -- code=3 user_id=1
+[2025-10-22 20:47:28] INSERTED_CART user_id=1 product_id=3 qty=1
+[2025-10-22 20:47:32] INSERTED_CART user_id=1 product_id=3 qty=1
+[2025-10-22 20:48:04] INSERTED_CART user_id=1 product_id=3 qty=1
+[2025-10-22 20:48:07] INSERTED_CART user_id=1 product_id=3 qty=1
+[2025-10-22 20:48:10] INSERTED_CART user_id=1 product_id=3 qty=1
+[2025-10-22 20:48:19] INSERTED_CART user_id=1 product_id=1 qty=1
