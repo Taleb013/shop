@@ -3,6 +3,12 @@
 A comprehensive e-commerce website built with PHP and MySQL, featuring a responsive design and modern user interface using Bootstrap 5.
 
 ## Features
+<img width="1920" height="1080" alt="Screenshot (2)" src="https://github.com/user-attachments/assets/1c34059f-3056-4892-8232-5bb8198cd4bf" />
+<img width="1920" height="1080" alt="Screenshot (3)" src="https://github.com/user-attachments/assets/643249f2-cdf3-4c9e-a974-6de8f1ded35b" />
+<img width="1920" height="1080" alt="Screenshot (4)" src="https://github.com/user-attachments/assets/1abffe3a-d5a8-44a3-9a2f-1bc6a51317b2" />
+
+<img width="1920" height="1080" alt="Screenshot (5)" src="https://github.com/user-attachments/assets/16503e3e-1c21-4468-b2c8-9c725bf7e66f" />
+
 <img width="1920" height="1080" alt="Screenshot (6)" src="https://github.com/user-attachments/assets/0546f065-b31a-4d6c-8531-95860c2c9268" />
 
 
